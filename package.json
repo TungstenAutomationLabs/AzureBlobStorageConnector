@@ -1,0 +1,19 @@
+{
+  "name": "blobstoragehelper",
+  "version": "1.0.0",
+  "description": "Azure function to proxy access to Azure Blob Storage, to simplify authentication & checksum calculation. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "azure",
+    "blob",
+    "storage"
+  ],
+  "author": "Tom Coppock",
+  "license": "ISC",
+  "dependencies": {
+    "@azure/storage-blob": "^12.16.0"
+  }
+}

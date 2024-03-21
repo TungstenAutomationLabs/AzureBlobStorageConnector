@@ -1,0 +1,7 @@
+{
+    "error": "none",
+    "debug": "Authenticated to the blob storage service.",
+    "action": "get_connection_string",
+    "connectionString": "YOUR_CONNECTION_STRING",
+    "containerName": "mynewcontainer3"
+  }

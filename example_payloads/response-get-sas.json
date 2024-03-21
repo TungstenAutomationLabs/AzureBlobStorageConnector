@@ -1,0 +1,6 @@
+{
+  "error": "none",
+  "debug": "Authenticated to the blob storage service.",
+  "action": "get_sas",
+  "sasToken": "YOUR_SAS_STRING"
+}

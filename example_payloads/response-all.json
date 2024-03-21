@@ -1,0 +1,40 @@
+{
+    "error": "none",
+    "debug": "DEBUG MESSAGE.",
+    "action": "ACTION",
+    "fileName": "FILENAME.EXT",
+    "fileAsBase64": "FILE AS BASE64",
+    "connectionString": "YOUR_CONNECTION_STRING",
+    "containerName": "CONTAINER_NAME",
+    "sasToken": "YOUR_SAS_STRING",
+    "result": "RESULTS.",
+    "results": [
+      {
+        "name": "FILE_NAME1.json",
+        "contentLength": 7971,
+        "createdOn": "2023-10-03T14:00:22.000Z",
+        "lastModified": "2023-10-03T14:00:22.000Z",
+        "contentType": "application/octet-stream"
+      },
+      {
+        "name": "FILE_NAME2.pdf",
+        "contentLength": 548400,
+        "createdOn": "2023-10-02T16:21:10.000Z",
+        "lastModified": "2023-10-02T16:21:10.000Z",
+        "contentType": "application/octet-stream"
+      }
+    ],
+    "examplePayload": {
+      "azure_storage_account_name": "x",
+      "azure_storage_account_key": "x",
+      "azure_storage_account_container": "x",
+      "optional_directory": ".",
+      "optional_file_name": "including/path/name.ext",
+      "optional_file_content_as_base64": " ",
+      "action": "list|create|read|update|delete|create_container|delete_container|get_sas|get_connection_string",
+      "optional_file_custom_metadata": {
+        "customKey1": "value1",
+        "customKey2": "value2"
+      }
+    }
+  }

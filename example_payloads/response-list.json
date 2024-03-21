@@ -1,0 +1,92 @@
+{
+    "error": "none",
+    "debug": "Authenticated to the blob storage service.",
+    "action": "list",
+    "results": [
+      {
+        "name": "AnalysisData__141beae9-1872-4b91-a22d-b08b00ce5733.json",
+        "contentLength": 7971,
+        "createdOn": "2023-10-03T14:00:22.000Z",
+        "lastModified": "2023-10-03T14:00:22.000Z",
+        "contentType": "application/octet-stream"
+      },
+      {
+        "name": "Bank statement_HSBC_AdamSmith_edited.pdf",
+        "contentLength": 548400,
+        "createdOn": "2023-10-02T16:21:10.000Z",
+        "lastModified": "2023-10-02T16:21:10.000Z",
+        "contentType": "application/octet-stream"
+      },
+      {
+        "name": "HSBC-Logo.png",
+        "contentLength": 19161,
+        "createdOn": "2023-10-04T16:26:39.000Z",
+        "lastModified": "2023-10-04T16:26:39.000Z",
+        "contentType": "application/octet-stream"
+      },
+      {
+        "name": "Screenshot 2023-08-25 103647.png",
+        "contentLength": 42840,
+        "createdOn": "2023-10-02T16:38:36.000Z",
+        "lastModified": "2023-10-02T16:38:36.000Z",
+        "contentType": "application/octet-stream"
+      },
+      {
+        "name": "dog.jpg",
+        "contentLength": 15662,
+        "createdOn": "2024-02-19T18:06:57.000Z",
+        "lastModified": "2024-02-19T18:06:57.000Z",
+        "contentType": "application/octet-stream"
+      },
+      {
+        "name": "hello-world.txt",
+        "contentLength": 11,
+        "createdOn": "2023-10-02T12:06:36.000Z",
+        "lastModified": "2024-02-23T14:05:03.000Z",
+        "contentType": "application/octet-stream",
+        "Metadata1": "value"
+      },
+      {
+        "name": "my.tif",
+        "contentLength": 18288,
+        "createdOn": "2023-10-02T13:20:14.000Z",
+        "lastModified": "2023-10-02T13:20:14.000Z",
+        "contentType": "application/octet-stream"
+      },
+      {
+        "name": "nasa-Q1p7bh3SHj8-unsplash-hd.jpg",
+        "contentLength": 74058,
+        "createdOn": "2023-10-02T16:22:24.000Z",
+        "lastModified": "2023-10-02T16:22:24.000Z",
+        "contentType": "application/octet-stream"
+      },
+      {
+        "name": "network-4851119_1280.jpg",
+        "contentLength": 173524,
+        "createdOn": "2023-10-02T16:38:19.000Z",
+        "lastModified": "2023-10-02T16:38:19.000Z",
+        "contentType": "application/octet-stream"
+      },
+      {
+        "name": "tomc/908f4b63-ed2f-4616-9bf0-b09600c518bd.pdf",
+        "contentLength": 2982649,
+        "createdOn": "2023-10-09T11:57:57.000Z",
+        "lastModified": "2023-10-09T11:57:57.000Z",
+        "contentType": "application/octet-stream"
+      },
+      {
+        "name": "tomc/hello-world.txt",
+        "contentLength": 15,
+        "createdOn": "2023-10-09T15:38:53.000Z",
+        "lastModified": "2023-10-09T15:38:53.000Z",
+        "contentType": "application/octet-stream"
+      },
+      {
+        "name": "tomc/mw2.pdf",
+        "contentLength": 2463786,
+        "createdOn": "2023-10-09T11:41:28.000Z",
+        "lastModified": "2023-10-09T11:41:28.000Z",
+        "contentType": "application/octet-stream"
+      }
+    ]
+  }

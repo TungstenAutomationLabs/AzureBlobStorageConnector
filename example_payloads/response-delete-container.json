@@ -1,0 +1,6 @@
+{
+    "error": "none",
+    "debug": "Authenticated to the blob storage service.",
+    "action": "delete_container",
+    "result": "Container \"CONTAINER_NAME\" deleted successfully."
+  }

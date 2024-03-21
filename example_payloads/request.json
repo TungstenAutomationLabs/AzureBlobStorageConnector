@@ -1,0 +1,13 @@
+{
+    "azure_storage_account_name": "YOUR_STORAGE_ACCOUNT_NAME",
+    "azure_storage_account_key": "YOUR_STORAGE_ACCOUNT_KEY",
+    "azure_storage_account_container": "YOUR_STORAGE_CONTAINER_NAME",
+    "optional_directory": ".",
+    "optional_file_name": "name.ext",
+    "optional_file_content_as_base64": " ",
+    "action": "list|create|read|update|delete|create_container|delete_container|get_sas|get_connection_string",
+    "optional_file_custom_metadata": {
+      "customKey1": "value1",
+      "customKey2": "value2"
+    }
+  }
