@@ -584,52 +584,56 @@ function determineContentType(filename) {
 
         // Determine the MIME type based on the file extension  
         switch (extension) {
-            case 'pdf':
-                return 'application/pdf';
+            case 'avi':
+                return 'video/x-msvideo';
+            case 'bmp':
+                return 'image/bmp';
+            case 'csv':
+                return 'text/csv';
+            case 'docx':
+                return 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+            case 'flv':
+                return 'video/x-flv';
+            case 'gif':
+                return 'image/gif';
             case 'htm':
             case 'html':
                 return 'text/html';
-            case 'txt':
-                return 'text/plain';
-            case 'csv': 
-                return 'text/csv';  
-            case 'tiff':
-            case 'tif':
-                return 'image/tiff';
-            case 'jpg':
             case 'jpeg':
+            case 'jpg':
                 return 'image/jpeg';
             case 'js':
                 return 'application/javascript';
-            case 'gif':
-                return 'image/gif';
-            case 'xml':
-                return 'application/xml';
             case 'json':
                 return 'application/json';
-            case 'docx':
-                return 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
-            case 'xlsx':
-                return 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
-            case 'bmp':
-                return 'image/bmp';
-            case 'mp4':
             case 'm4v':
+            case 'mp4':
                 return 'video/mp4';
-            case 'webm':
-                return 'video/webm';
-            case 'ogv':
-                return 'video/ogg';
-            case 'avi':
-                return 'video/x-msvideo';
-            case 'mov':
-                return 'video/quicktime';
-            case 'wmv':
-                return 'video/x-ms-wmv';
-            case 'flv':
-                return 'video/x-flv';
             case 'mkv':
                 return 'video/x-matroska';
+            case 'mov':
+                return 'video/quicktime';
+            case 'ogv':
+                return 'video/ogg';
+            case 'pdf':
+                return 'application/pdf';
+            case 'png':
+                return 'image/png';
+            case 'pptx':
+                return 'application/vnd.openxmlformats-officedocument.presentationml.presentation';
+            case 'tif':
+            case 'tiff':
+                return 'image/tiff';
+            case 'txt':
+                return 'text/plain';
+            case 'webm':
+                return 'video/webm';
+            case 'wmv':
+                return 'video/x-ms-wmv';
+            case 'xlsx':
+                return 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+            case 'xml':
+                return 'application/xml';
             default:
                 return 'application/octet-stream'; // Default MIME type for unknown files  
         }
