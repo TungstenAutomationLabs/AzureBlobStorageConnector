@@ -48,7 +48,7 @@ module.exports = async function (context, req) {
 
 
         if (req.method != 'POST') {
-            responseJson.error = `This HTTP triggered function executed successfully, but should be called using POST.  Pass in the following parameters in the POST body:` 
+            responseJson.error = `This HTTP triggered function executed successfully, but should be called using POST.  Pass in the following parameters in the POST body:`
             responseJson.examplePayload = examplePayload;
             responseJson.guidance = "The service will return a status code 200 if successful, 400 if called with an incorrect payload, or 500 if there is an error.";
             context.res = {
@@ -62,7 +62,7 @@ module.exports = async function (context, req) {
             if (obj.azure_storage_account_name &&
                 obj.azure_storage_account_key &&
                 obj.azure_storage_account_container &&
-                (obj.action === "list" || obj.action === "create" || obj.action === "read" || obj.action === "update" || obj.action === "delete" || obj.action === "create_container"  || obj.action === "delete_container" || obj.action === "get_sas"  || obj.action === "get_connection_string" )
+                (obj.action === "list" || obj.action === "create" || obj.action === "read" || obj.action === "update" || obj.action === "delete" || obj.action === "create_container" || obj.action === "delete_container" || obj.action === "get_sas" || obj.action === "get_connection_string")
             ) {
 
                 /**
@@ -80,12 +80,12 @@ module.exports = async function (context, req) {
                 // throw new Error ("TEST ERROR");
 
                 if (obj.action === "create_container" || obj.action === "delete_container") {
-                    if (obj.action === "create_container" ) {
+                    if (obj.action === "create_container") {
                         if (isValidContainerName(obj.azure_storage_account_container)) {
                             responseJson.result = await create_container(blobServiceClient, obj.azure_storage_account_container);
                         } else {
-                            throw new Error("Invalid container name. Container names can only contain lowercase letters, numbers, and hyphens, and must start and end with a letter or number.");                            
-                        }  
+                            throw new Error("Invalid container name. Container names can only contain lowercase letters, numbers, and hyphens, and must start and end with a letter or number.");
+                        }
                     }
                     if (obj.action === "delete_container") {
                         responseJson.result = await delete_container(blobServiceClient, obj.azure_storage_account_container);
@@ -116,25 +116,25 @@ module.exports = async function (context, req) {
                             if (responseJson.debug.startsWith("Error:")) {
                                 responseJson.error = responseJson.debug;
                             }
-                            
+
                             // Add any optional metadata to the new object:
                             // Check if obj.optional_file_custom_metadata exists and is not null
                             if (obj.optional_file_custom_metadata && Object.keys(obj.optional_file_custom_metadata).length > 0) {
                                 console.log('Data exists in obj.optional_file_custom_metadata.');
-                                
+
                                 // Extract custom metadata from JSON
-                                let customMetadata = obj.optional_file_custom_metadata || {}; 
+                                let customMetadata = obj.optional_file_custom_metadata || {};
 
                                 const blobClient = containerClient.getBlobClient(obj.optional_file_name);
 
                                 try {
                                     // Set custom metadata for the blob
-                                    await blobClient.setMetadata( customMetadata  );
+                                    await blobClient.setMetadata(customMetadata);
                                 } catch (error) {
                                     console.error('Error adding custom metadata:', error.message);
                                     responseJson.metadata_error = "Error adding custom metadata: " + error.message;
                                 }
-                            } 
+                            }
                             // End add metadata
                             break;
                         case "read":
@@ -159,7 +159,7 @@ module.exports = async function (context, req) {
                                     responseJson.fileName = addDirectoryToFilename(obj.optional_directory, obj.optional_file_name);
                                     responseJson.debug = await create_blob(containerClient, responseJson.fileName, obj.optional_file_content_as_base64);
                                 }
-                            }                        
+                            }
                             if (responseJson.debug.startsWith("Error:")) {
                                 responseJson.error = responseJson.debug;
                             }
@@ -167,20 +167,20 @@ module.exports = async function (context, req) {
                             // Check if obj.optional_file_custom_metadata exists and is not null
                             if (obj.optional_file_custom_metadata && Object.keys(obj.optional_file_custom_metadata).length > 0) {
                                 console.log('Data exists in obj.optional_file_custom_metadata.');
-                                
+
                                 // Extract custom metadata from JSON
-                                let customMetadata = obj.optional_file_custom_metadata || {}; 
+                                let customMetadata = obj.optional_file_custom_metadata || {};
 
                                 const blobClient = containerClient.getBlobClient(obj.optional_file_name);
 
                                 try {
                                     // Set custom metadata for the blob
-                                    await blobClient.setMetadata( customMetadata  );
+                                    await blobClient.setMetadata(customMetadata);
                                 } catch (error) {
                                     console.error('Error adding custom metadata:', error.message);
                                     responseJson.metadata_error = "Error adding custom metadata: " + error.message;
                                 }
-                            } 
+                            }
                             // End add metadata
                             break;
                         case "delete":
@@ -196,13 +196,13 @@ module.exports = async function (context, req) {
                                 responseJson.error = responseJson.debug;
                             }
                             break;
-                        case "get_sas":    
+                        case "get_sas":
                             responseJson.sasToken = await generateContainerSasToken(containerClient);
                             break;
 
                         case "get_connection_string":
                             responseJson.connectionString = `DefaultEndpointsProtocol=https;BlobEndpoint=https://${obj.azure_storage_account_name}.blob.core.windows.net;SharedAccessSignature=${await generateContainerSasToken(containerClient)}`
-                            responseJson.containerName=obj.azure_storage_account_container
+                            responseJson.containerName = obj.azure_storage_account_container
                             break;
                         default:
                             responseJson.debug = "Error reading action parameter"; // Should never be reached
@@ -218,7 +218,7 @@ module.exports = async function (context, req) {
 
             } else {
 
-                responseJson.error = `This HTTP triggered function executed successfully, but not all the required information was found. Please use the example payload for guidance:` 
+                responseJson.error = `This HTTP triggered function executed successfully, but not all the required information was found. Please use the example payload for guidance:`
                 responseJson.examplePayload = examplePayload;
 
                 context.res = {
@@ -230,7 +230,7 @@ module.exports = async function (context, req) {
         }
 
     } catch (error) {
-        responseJson.error = `An error occured. Pass in the following parameters in the POST body to call the service:` 
+        responseJson.error = `An error occured. Pass in the following parameters in the POST body to call the service:`
         responseJson.examplePayload = examplePayload;
         responseJson.errorMessage = "\"" + error + "\""; // Potentially could URI error to make sure json is alway valid, but makes error harder to read, so omitted for now. 
         responseJson.guidance = "The service will return a status code 200 if successful, 400 if called with an incorrect payload, or 500 if there is an error.";
@@ -299,17 +299,17 @@ async function list_directory(containerClient, directory) {
             if (entity.value.metadata) {  
                 item.metadata = entity.value.metadata;  
             } 
-            */ 
+            */
 
             // Add metadata to the top level item using the specified key names:
-            if (entity.value.metadata) {  
-                Object.keys(entity.value.metadata).forEach((key) => {  
+            if (entity.value.metadata) {
+                Object.keys(entity.value.metadata).forEach((key) => {
                     const metadataKey = `${key}`;  // Could also use `metadata_${key}`
-                    item[metadataKey] = entity.value.metadata[key];  
-                });  
-            }  
+                    item[metadataKey] = entity.value.metadata[key];
+                });
+            }
 
-  
+
 
             results.push(item);
         } else {
@@ -427,8 +427,18 @@ async function create_blob(containerClient, blobName, base64String) {
         // Create blob client from container client
         const blockBlobClient = containerClient.getBlockBlobClient(blobName);
 
+        // Get the mimeType / contentType
+        const contentType = determineContentType(blobName);
+
+        // Set options, including the MIME type  
+        const options = {
+            blobHTTPHeaders: {
+                blobContentType: contentType
+            }
+        };
+
         // Upload buffer
-        await blockBlobClient.uploadData(buffer);
+        await blockBlobClient.uploadData(buffer, options);
 
         return `Created blob: ${blobName}`;
 
@@ -450,18 +460,18 @@ function addDirectoryToFilename(directory, filename) {
     if (typeof directory === 'undefined' || directory === null || directory === "") {
         return filename; // No directory was provided
     } else {
-        var lastIndexOfSlash = filename.lastIndexOf('/') +1; // +1 so it removes the "/" as well
+        var lastIndexOfSlash = filename.lastIndexOf('/') + 1; // +1 so it removes the "/" as well
         //console.log("lastIndexOfSlash: " + (lastIndexOfSlash) );
         trimmed_filename = filename.substring(lastIndexOfSlash); // Remove any path provided in the filename
         if (directory.endsWith('/')) { // Directory ends with /
-            return directory + trimmed_filename; 
-          } else { // Directory does not end with /
+            return directory + trimmed_filename;
+        } else { // Directory does not end with /
             return directory + "/" + trimmed_filename;
-          }
+        }
     }
 }
-    
-    
+
+
 
 /************************************************************************************************
  * Creates the specified container, if it  doesn't already exist.  
@@ -503,16 +513,16 @@ async function delete_container(blobServiceClient, containerName) {
     const containerClient = blobServiceClient.getContainerClient(containerName);
 
     try {
-      const exists = await containerClient.exists();
-  
-      if (exists) {
-        await containerClient.delete();
-        return `Container "${containerName}" deleted successfully.`;
-      } else {
-        return `Container "${containerName}" does not exist.`;
-      }
+        const exists = await containerClient.exists();
+
+        if (exists) {
+            await containerClient.delete();
+            return `Container "${containerName}" deleted successfully.`;
+        } else {
+            return `Container "${containerName}" does not exist.`;
+        }
     } catch (error) {
-      return `Error: ${error.message}`;
+        return `Error: ${error.message}`;
     }
 }
 
@@ -521,14 +531,14 @@ async function delete_container(blobServiceClient, containerName) {
 function isValidContainerName(containerName) {
     // Regular expression for validating Azure Storage container name
     const validContainerNameRegex = /^[a-z0-9](-*[a-z0-9])*$/;
-  
+
     // Check if the container name matches the valid regex
     if (validContainerNameRegex.test(containerName)) {
-      return true;
+        return true;
     } else {
-      return false;
+        return false;
     }
-  }
+}
 
 /************************************************************************************************
  * Creates a temporary Shared Access Signature for the blob storage container . 
@@ -540,19 +550,92 @@ async function generateContainerSasToken(containerClient) {
     // Set the SAS expiration time (in this example, it's set to expire in 24 hours)
     const expiryTime = new Date();
     expiryTime.setHours(expiryTime.getHours() + 24);
-  
+
     // Define the SAS permissions for the container
     //const permissions = ContainerSASPermissions.parse("rwdl"); // Adjust permissions as needed
     const permissions = ContainerSASPermissions.parse("rl");
-  
+
     // Generate the SAS token for the container
     const sasToken = generateBlobSASQueryParameters({
-      containerName: containerClient.containerName,
-      permissions,
-      startsOn: new Date(),
-      expiresOn: expiryTime,
-      protocol: SASProtocol.HttpsAndHttp, // Adjust protocol as needed
+        containerName: containerClient.containerName,
+        permissions,
+        startsOn: new Date(),
+        expiresOn: expiryTime,
+        protocol: SASProtocol.HttpsAndHttp, // Adjust protocol as needed
     }, containerClient.credential).toString();
-  
+
     return sasToken;
-  }
+}
+
+
+
+
+/*****************************************************
+ * 
+ * Utility method to get the mimetype for a file
+ * 
+ * @param {string} filename 
+ * @returns {string} MimeType for the file
+ */
+function determineContentType(filename) {
+    try {
+        // Extract the file extension and remove any path 
+        const extension = filename.split(/[/\\]/).pop().split('.').pop().toLowerCase();
+
+        // Determine the MIME type based on the file extension  
+        switch (extension) {
+            case 'pdf':
+                return 'application/pdf';
+            case 'htm':
+            case 'html':
+                return 'text/html';
+            case 'txt':
+                return 'text/plain';
+            case 'csv': 
+                return 'text/csv';  
+            case 'tiff':
+            case 'tif':
+                return 'image/tiff';
+            case 'jpg':
+            case 'jpeg':
+                return 'image/jpeg';
+            case 'js':
+                return 'application/javascript';
+            case 'gif':
+                return 'image/gif';
+            case 'xml':
+                return 'application/xml';
+            case 'json':
+                return 'application/json';
+            case 'docx':
+                return 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+            case 'xlsx':
+                return 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+            case 'bmp':
+                return 'image/bmp';
+            case 'mp4':
+            case 'm4v':
+                return 'video/mp4';
+            case 'webm':
+                return 'video/webm';
+            case 'ogv':
+                return 'video/ogg';
+            case 'avi':
+                return 'video/x-msvideo';
+            case 'mov':
+                return 'video/quicktime';
+            case 'wmv':
+                return 'video/x-ms-wmv';
+            case 'flv':
+                return 'video/x-flv';
+            case 'mkv':
+                return 'video/x-matroska';
+            default:
+                return 'application/octet-stream'; // Default MIME type for unknown files  
+        }
+    }
+    catch (error) {
+        return 'application/octet-stream'; // Default MIME type for unknown files  
+    }
+
+}  
