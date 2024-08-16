@@ -11,7 +11,7 @@ Example Payload (base features, all required):
     "optional_directory": ".",
     "optional_file_name": "name.ext",
     "optional_file_content_as_base64": " ",
-    "action": "list|create|read|update|delete|create_container|delete_container|get_sas|get_connection_string",
+    "action": "list|create|read|update|delete|create_container|delete_container|exists_container|get_sas|get_connection_string",
     "optional_file_custom_metadata": {
         "key1": "value-1",
         "key2": "value-2"
@@ -29,7 +29,7 @@ const examplePayload = {
     "optional_directory": ".",
     "optional_file_name": "name.ext",
     "optional_file_content_as_base64": " ",
-    "action": "list|create|read|update|delete|create_container|delete_container|get_sas|get_connection_string",
+    "action": "list|create|read|update|delete|create_container|delete_container|exists_container|get_sas|get_connection_string",
     "optional_file_custom_metadata": {
         "customKey1": "value1",
         "customKey2": "value2"
@@ -62,7 +62,7 @@ module.exports = async function (context, req) {
             if (obj.azure_storage_account_name &&
                 obj.azure_storage_account_key &&
                 obj.azure_storage_account_container &&
-                (obj.action === "list" || obj.action === "create" || obj.action === "read" || obj.action === "update" || obj.action === "delete" || obj.action === "create_container" || obj.action === "delete_container" || obj.action === "get_sas" || obj.action === "get_connection_string")
+                (obj.action === "list" || obj.action === "create" || obj.action === "read" || obj.action === "update" || obj.action === "delete" || obj.action === "create_container" || obj.action === "delete_container" || obj.action === "exists_container" || obj.action === "get_sas" || obj.action === "get_connection_string")
             ) {
 
                 /**
@@ -79,7 +79,7 @@ module.exports = async function (context, req) {
 
                 // throw new Error ("TEST ERROR");
 
-                if (obj.action === "create_container" || obj.action === "delete_container") {
+                if (obj.action === "create_container" || obj.action === "delete_container" || obj.action === "exists_container") {
                     if (obj.action === "create_container") {
                         if (isValidContainerName(obj.azure_storage_account_container)) {
                             responseJson.result = await create_container(blobServiceClient, obj.azure_storage_account_container);
@@ -89,6 +89,9 @@ module.exports = async function (context, req) {
                     }
                     if (obj.action === "delete_container") {
                         responseJson.result = await delete_container(blobServiceClient, obj.azure_storage_account_container);
+                    }
+                    if (obj.action === "exists_container") {
+                        responseJson.result = await exists_container(blobServiceClient, obj.azure_storage_account_container);
                     }
                 } else {
                     // create container client
@@ -527,6 +530,21 @@ async function delete_container(blobServiceClient, containerName) {
 }
 
 
+async function exists_container(blobServiceClient, containerName) {
+    const containerClient = blobServiceClient.getContainerClient(containerName);
+
+    try {
+        const exists = await containerClient.exists();
+
+        if (exists) {
+            return `true`;
+        } else {
+            return `false`;
+        }
+    } catch (error) {
+        return `Error: ${error.message}`;
+    }
+}
 
 function isValidContainerName(containerName) {
     // Regular expression for validating Azure Storage container name
