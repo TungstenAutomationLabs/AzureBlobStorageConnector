@@ -33,6 +33,7 @@ The function provides an RPC style interface to call blob storage, using json ov
  - delete - deletes a file
  - create_container - creates a new container
  - delete_container - deletes a container
+ - exists_container - checks if a container exists or not
  - get_sas - gets a SAS string to access files in a container, valid for 24hrs
  - get_connection_string - gets a connection string to access the specified container
 
